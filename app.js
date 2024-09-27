@@ -13,6 +13,7 @@ const loginRoute = require('./routes/login');
 const logout = require('./routes/logout');
 const newRoute = require('./routes/new');
 const deleteRoute = require('./routes/delete');
+const MongoStore = require('connect-mongo');
 
 const app = express();
 
@@ -39,6 +40,10 @@ app.use(
     cookie: {
       secure: false, // Set to true if using HTTPS
       maxAge: 1000 * 60 * 60 * 24, // 1 day
+      store: MongoStore.create({
+        mongoUrl: process.env.url, // Replace with your MongoDB connection string
+        ttl: 24 * 60 * 60, // 1 day in seconds
+      })
     },
   })
 );

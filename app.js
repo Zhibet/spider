@@ -13,8 +13,7 @@ const loginRoute = require('./routes/login');
 const logout = require('./routes/logout');
 const newRoute = require('./routes/new');
 const deleteRoute = require('./routes/delete');
-const SessionManager = require('session-store-js');
-
+const MongoStore = require('connect-mongo');
 
 const app = express();
 
@@ -32,13 +31,14 @@ app.use(express.static('public'))
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); 
 
+
 // Session configuration
 app.use(
   session({
+    store: MongoStore.create({ mongoUrl: process.env.url}),
     secret: process.env.secret,
     resave: false,
     saveUninitialized: true,
-    store: new SessionManager(), // Ensure proper configuration for session-store-js
     cookie: {
       secure: false, // Set to true if using HTTPS
       maxAge: 1000 * 60 * 60 * 24, // 1 day

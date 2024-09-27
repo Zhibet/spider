@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Session configuration
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: process.env.secret,
     resave: false,
     saveUninitialized: true,
     store: new SessionManager(), // Ensure proper configuration for session-store-js

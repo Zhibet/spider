@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-10 mx-auto">
+        <h3 class="text-end mt-3 text-capitalize">Welcome back, <%= user %></h3>
+        <div class="row row-cols-1 row-cols-md-4 g-4"> 
+            <% cards.forEach(card => { %>
+                <div class="col">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="front">
+                                <img src="<%= card.img %>" class="card-img-top" alt="<%= card.title %>">
+                            </div>
+                            <div class="back">
+                                <div class="card-body h-100 w-100">
+                                    <h5 class="card-title text-center text-uppercase"><%= card.title %></h5>
+                                    <p class="card-text text-center"><%= card.description %></p>
+                                    <div class="d-flex justify-content-end">
+                                        <a href="/delete/<%= card._id %>">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+        <div class="col mt-3 text-end">
+            <a href="/new" class="btn btn-primary">Add New</a>
+         </div>
+    </div>
+</div>
